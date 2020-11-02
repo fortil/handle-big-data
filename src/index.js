@@ -16,6 +16,7 @@ const logInput = (inputTag, inputCount) => new Promise((resolve, reject) => {
   const rl = readline.createInterface(instream, outstream);
   
   // save all uniques tags
+  const uniqueTags = {};
   const tags = {};
   // catch the last line
   const lastLine = { tag: '', count: 0, line: 0 };
@@ -51,9 +52,9 @@ const logInput = (inputTag, inputCount) => new Promise((resolve, reject) => {
     lineCount++;
     const [tag, count] = line.split('=');
 
-    if (tag === inputTag && +count === inputCount) {
+    if (tag === inputTag) {
       lastLine.tag = tag;
-      lastLine.count = +count;
+      lastLine.count = inputCount;
       lastLine.line = lineCount;
     }
     tags[tag] = count;
