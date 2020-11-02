@@ -5,7 +5,7 @@ const generateLog = require('../src/generate-log');
 
 const pathFile = path.resolve(__dirname, '../src', 'logfile.log');
 
-describe.skip('Testing generateLog file', () => {
+describe('Testing generateLog file', () => {
   it('generateLog', () => {
     return generateLog()
       .then((response) => {

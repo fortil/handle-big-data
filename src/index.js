@@ -34,9 +34,7 @@ const logInput = (inputTag, inputCount) => new Promise((resolve, reject) => {
 
   // object to be sent
   const response = (entries) => ({
-    entries: () => {
-      return entries;
-    },
+    entries,
     logUnique: () => {
       return Object.entries(entries);
     },

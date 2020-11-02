@@ -8,6 +8,11 @@ const writer = fs.createWriteStream(pathFile, { flags: 'a' });
 
 const alphabet = generateAlphabet(true);
 
+/**
+ * WriteOneMillionTimes
+ * @param {WritableStream} writer writable stream object
+ * @param {function} callback function that will be exected after write the last line
+ */
 const writeOneMillionTimes = (writer, callback) => {
   let i = 2e4; // you can up this number
   function write() {
