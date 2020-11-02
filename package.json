@@ -1,0 +1,14 @@
+{
+	"name": "evisit",
+	"version": "0.0.1",
+	"description": "contents of the log file",
+	"main": "src/index.js",
+	"scripts": {
+		"test": "./node_modules/mocha/bin/mocha"
+	},
+	"author": "billalpeza@gmail.com",
+	"license": "ISC",
+	"dependencies": {
+		"mocha": "^8.2.0"
+	}
+}
