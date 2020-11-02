@@ -13,7 +13,7 @@ describe('Testing log_input function', () => {
         assert.equal(typeof response.logUnique, 'function');
         assert.equal(typeof response.logSorted, 'function');
         assert.equal(typeof response.logSum, 'function');
-        assert.equal(typeof response.totalLines, 'function');
+        assert.equal(typeof response.totalLines, 'number');
       });
   });
 

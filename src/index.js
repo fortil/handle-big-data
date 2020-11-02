@@ -44,15 +44,14 @@ const logInput = (inputTag, inputCount) => new Promise((resolve, reject) => {
     logSum: () => {
       return Object.keys(entries).length;
     },
-    totalLines: () => {
-      return lineCount;
-    },
+    totalLines: lineCount,
   });
 
   rl.on('line', (line) => {
     lineCount++;
     const [tag, count] = line.split('=');
-    if (tag === inputTag && count === inputCount) {
+
+    if (tag === inputTag && +count === inputCount) {
       lastLine.tag = tag;
       lastLine.count = +count;
       lastLine.line = lineCount;
@@ -65,7 +64,7 @@ const logInput = (inputTag, inputCount) => new Promise((resolve, reject) => {
   rl.on('close', () => {
     if (lastLine.tag !== '' && lastLine.line === lineCount) {
       const l = fs.createWriteStream(pathFile, { flags: 'a' });
-      l.write(`${tag}=${inputCount}\n`);
+      l.write(`${lastLine.tag}=${lastLine.count}\n`);
       l.close();
     }
     resolve(response(tags));
