@@ -3,6 +3,8 @@ const path = require('path');
 const readline = require('readline');
 const stream = require('stream');
 
+const pathFile = path.resolve(__dirname, './logfile.log');
+
 /**
  * 
  * @param {string} inputTag string to save if is repeated
@@ -11,7 +13,6 @@ const stream = require('stream');
  */
 const logInput = (inputTag, inputCount) => new Promise((resolve, reject) => {
   const outstream = new stream();
-  const pathFile = path.resolve(__dirname, './logfile.log');
   const instream = fs.createReadStream(pathFile);
   const rl = readline.createInterface(instream, outstream);
   
@@ -56,6 +57,9 @@ const logInput = (inputTag, inputCount) => new Promise((resolve, reject) => {
       lastLine.tag = tag;
       lastLine.count = inputCount;
       lastLine.line = lineCount;
+      console.log(line, li, +count + inputCount)
+      rl.write('', { ctrl: true, name: 'u' });
+      rl.write(`${tag}=${+count + inputCount}\n`);
     }
     tags[tag] = count;
   });
@@ -71,6 +75,10 @@ const logInput = (inputTag, inputCount) => new Promise((resolve, reject) => {
     resolve(response(tags));
   });
   
+});
+
+logInput('i', 1).then((response) => {
+  console.log(response);
 });
 
 module.exports = logInput;
