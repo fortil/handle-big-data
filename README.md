@@ -1,16 +1,31 @@
 # Handling big data file
 
 ## Function
-`const logInput = require('./index)`
-
-The main function returns a function to init with a word and value `logInput(tag, number)`, you will get an object like following:
-
+### Example
 ```js
-{
-  entries // are the entries in a object key value,
-  logUnique, // function that returns an array without repeated entries
-  logSorted, // function to sort the unique values, if you pass true you will get get the rever array
-  logSum, // function to get all sum of the values
-  totalLines, // number of total lines
-}
+const Logger = require('./src/index');
+ // you can pass a string to the file log name
+ // new Logger('file.log');
+ // or an object
+ // new Logger({ fileName: 'file.log', emitEachLine: 1e3, ...rest });
+ // each many lines do you want to see the logs (1e3 each thounsend lines)
+ // rest and object accepted by EventEmitter class
+const logger = new Logger({ fileName: 'file.log', emitEachLine: 1e4 });
+// to listen the sytem metrics
+logger.on('sysinfo', console.log);
+// to listen the erors
+logger.on('error', console.error);
+// to create a random log file
+// pass the times to repeat the file creator
+logger.createRandomLogFile(5, 'file.log') // will return a promise
+// to add new input
+logger.logInput('tag', 100)
+// will return an object to handle the log
+  .then((response) => {
+    /*
+    { logUniques, logSum, logSorted, totalLines, ...rest } = response
+    */
+   console.log('array of uniques logs:', response.logUniques());
+   console.log('number of total lines:', response.totalLines);
+  })
 ```

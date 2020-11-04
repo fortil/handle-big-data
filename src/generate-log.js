@@ -2,10 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const { generateAlphabet, getRandomWord } = require('./utils');
 
-const pathFile = path.resolve(__dirname, 'logfile.log');
-
-const writer = fs.createWriteStream(pathFile, { flags: 'a' });
-
 const alphabet = generateAlphabet(true);
 
 /**
@@ -35,19 +31,20 @@ const writeOneMillionTimes = (writer, callback) => {
   write();
 }
 
-async function start() {
+async function start(times = 8, fileName = 'logfile.log') {
   try {
-    for (let i = 0; i < 8; i++) {
+    // name of file
+    const pathFile = path.resolve(__dirname, fileName);
+    const writer = fs.createWriteStream(pathFile, { flags: 'a' });
+    for (let i = 0; i < times; i++) {
       await new Promise((resolved) => writeOneMillionTimes(writer, resolved));
     }
-
     writer.close();
     return true;
 
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return false;
   }
 }
-
 module.exports = start;
