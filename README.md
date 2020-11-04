@@ -1,7 +1,18 @@
 # Handling big data file
 
-## Function
-### Example
+## Features
+- Create alphabet (English) random
+- Create random logfile
+- Insert new log
+- Get all logs
+- Get unique logs
+- Get memory usage in realtime
+
+## How it works
+## Test
+`npm test`
+
+### Play (example)
 ```js
 const Logger = require('./src/index');
  // you can pass a string to the file log name
