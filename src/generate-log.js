@@ -35,7 +35,7 @@ const writeOneMillionTimes = (writer, callback) => {
   write();
 }
 
-module.exports = async () => {
+async function start() {
   try {
     for (let i = 0; i < 8; i++) {
       await new Promise((resolved) => writeOneMillionTimes(writer, resolved));
@@ -50,3 +50,4 @@ module.exports = async () => {
   }
 }
 
+module.exports = start;
